@@ -2,12 +2,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Hash;
 use Socialite;
-use App\User;
 
 class UserAuthController extends Controller
 {
+    public function index()
+    {
+        return view('master');    
+    }
+    
     //Facebook登入
     public function facebookSignInProcess()
     {
@@ -83,6 +88,13 @@ class UserAuthController extends Controller
 
         session()->put('user_id', $user->id);
         
-        return redirect()->intended('/');
+        return redirect('/home');
+    }
+    
+    public function facebookSignOut()
+    {
+        session()->forget('user_id');
+        
+        return redirect('/home');
     }
 }

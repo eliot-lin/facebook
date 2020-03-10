@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home', 'UserAuthController@index');
 
 Route::group(['prefix' => 'user'], function(){
     //使用者驗證
@@ -26,5 +28,7 @@ Route::group(['prefix' => 'user'], function(){
         Route::get('/facebook-sign-in', 'UserAuthController@facebookSignInProcess');
         //Facebook登入重新導向授權資料處理
         Route::get('/facebook-sign-in-callback', 'UserAuthController@facebookSignInCallbackProcess');
+        
+        Route::get('/sign-out', 'UserAuthController@facebookSignOut');
     });
 });
